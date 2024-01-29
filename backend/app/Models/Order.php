@@ -36,6 +36,6 @@ class Order extends Model
 
     public function approval()
     {
-        return $this->hasMany(Approval::class);
+        return $this->hasMany(Approval::class, 'order_id', 'order_id');
     }
 }

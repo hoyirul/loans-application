@@ -17,7 +17,6 @@ class Approval extends Model
     protected $casts =
     [
         'user_id' => 'integer',
-        'order_id' => 'integer'
     ];
 
     public function user()
@@ -27,6 +26,6 @@ class Approval extends Model
 
     public function order()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id', 'order_id');
     }
 }
