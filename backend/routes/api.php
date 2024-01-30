@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/vehicles', VehicleController::class);
     Route::apiResource('/orders', OrderController::class);
+    Route::get('/orders/reports/approved-orders/', [OrderController::class, 'reportApprovedOrders']);
+    Route::get('/orders/reports/vehicle-orders/', [OrderController::class, 'reportVehicleOrders']);
     Route::prefix('/approvals')->group(function(){
         Route::get('/', [ApprovalController::class, 'index']);
         Route::get('/{id}', [ApprovalController::class, 'show']);

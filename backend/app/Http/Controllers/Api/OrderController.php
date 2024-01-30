@@ -35,6 +35,42 @@ class OrderController extends Controller
         }
     }
 
+    public function reportApprovedOrders()
+    {
+        try {
+            $response = Order::selectRaw('DATE(order_date) as date, count(*) as total')
+                ->where('approval_status', 'approved')
+                ->groupBy('date')
+                ->orderBy('date', 'asc')
+                ->get();
+
+            return $this->apiSuccess($response, Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return $this->apiError(
+                $e->getMessage(),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function reportVehicleOrders()
+    {
+        try {
+            $response = Order::selectRaw('vehicles.name as name, count(*) as total')
+                ->join('vehicles', 'vehicles.id', '=', 'orders.vehicle_id')
+                ->groupBy('name')
+                ->orderBy('name', 'asc')
+                ->get();
+
+            return $this->apiSuccess($response, Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return $this->apiError(
+                $e->getMessage(),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     public function store(OrderRequest $request)
     {
         try {
