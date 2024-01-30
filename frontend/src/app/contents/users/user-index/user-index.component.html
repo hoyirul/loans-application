@@ -1,0 +1,60 @@
+<div class="col-lg-12 d-flex align-items-stretch container-fluid">
+  <div class="card w-100">
+    <div class="card-body p-4">
+      <h5 class="card-title fw-semibold float-start">List Users</h5>
+      <a class="btn btn-primary float-end" (click)="createUser()">Add Users</a>
+      <br><br>
+      <div class="table-responsive">
+        <table class="table text-nowrap mb-0 align-middle table-striped">
+          <thead class="text-dark fs-4">
+            <tr>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">UserID</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Name</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Role</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Created At</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Actions</h6>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of response; let i = index">
+              <td class="border-bottom-0"><h6 class="fw-semibold mb-0">USRX{{ i+1 }}</h6></td>
+              <td class="border-bottom-0">
+                  <h6 class="fw-semibold mb-1">{{ item.name }}</h6>
+                  <span class="fw-normal">{{ item.email }}</span>
+              </td>
+              <td class="border-bottom-0">
+                <div *ngIf="item.role.role == 'administrator'" class="d-flex align-items-center gap-2">
+                  <span class="badge bg-primary rounded-3 fw-semibold">Admin</span>
+                </div>
+                <div *ngIf="item.role.role == 'superior'" class="d-flex align-items-center gap-2">
+                  <span class="badge bg-success rounded-3 fw-semibold">User</span>
+                </div>
+              </td>
+              <td class="border-bottom-0">
+                <p class="mb-0 fw-normal">{{ formatDateTime(item.created_at) }}</p>
+              </td>
+              <td class="border-bottom-0">
+                <div class="d-flex align-items-center gap-3">
+                  <a class="btn btn-outline-primary btn-sm" (click)="updateUser(item.id)">
+                    <i class="ti ti-pencil"> </i>
+                    Edit User
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,54 @@
-<p>vehicle-create works!</p>
+<div class="col-lg-12 d-flex align-items-stretch container-fluid">
+  <div class="card w-100">
+    <div class="card-body p-4">
+      <h5 class="card-title fw-semibold float-start">Add Vehicles</h5>
+      <a class="btn btn-primary float-end" [routerLink]="['/vehicles']">Back to Vehicles</a>
+      <br><br>
+      <form [formGroup]="form" (ngSubmit)="createVehicle()">
+        <div class="mb-3 row">
+          <div class="col-md-4">
+            <label for="selectCategory" class="form-label">Category</label>
+            <select class="form-select" aria-label="Default select example" formControlName="category">
+              <option disabled selected value="-1">Click to open categories</option>
+              <option value="goods">Goods</option>
+              <option value="people">People</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="selectType" class="form-label">Type</label>
+            <select class="form-select" aria-label="Default select example" formControlName="type">
+              <option disabled selected value="-1">Click to open types</option>
+              <option value="mine">Mine</option>
+              <option value="rent">Rent</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="nameOfVehicle" class="form-label">Name of Vehicle</label>
+            <input type="text" class="form-control" id="nameOfVehicle" placeholder="Name of Vehicle" formControlName="name">
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <div class="col-md-3">
+            <label for="policeNumber" class="form-label">Police Number</label>
+            <input type="text" class="form-control" id="policeNumber" placeholder="Police Number" formControlName="police_number">
+          </div>
+          <!-- amount -->
+          <div class="col-md-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="amount" placeholder="Amount" formControlName="amount">
+          </div>
+          <div class="col-md-3">
+            <label for="bbmConsume" class="form-label">BBM Consume</label>
+            <input type="text" class="form-control" id="bbmConsume" placeholder="BBM Consume" formControlName="bbm_consume">
+          </div>
+          <div class="col-md-3">
+            <label for="serviceSchedule" class="form-label">Service Schedule</label>
+            <input type="date" class="form-control" id="serviceSchedule" placeholder="Service Schedule" formControlName="service_schedule">
+          </div>
+        </div>
+        <!-- Button -->
+        <button type="submit" class="btn btn-primary float-start">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,9 @@ import { AuthenticationComponent } from './contents/authentication/authenticatio
 import { VehicleIndexComponent } from './contents/vehicles/vehicle-index/vehicle-index.component';
 import { VehicleCreateComponent } from './contents/vehicles/vehicle-create/vehicle-create.component';
 import { VehicleEditComponent } from './contents/vehicles/vehicle-edit/vehicle-edit.component';
+import { OrderIndexComponent } from './contents/orders/order-index/order-index.component';
+import { OrderCreateComponent } from './contents/orders/order-create/order-create.component';
+import { UserIndexComponent } from './contents/users/user-index/user-index.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { VehicleEditComponent } from './contents/vehicles/vehicle-edit/vehicle-e
     VehicleIndexComponent,
     VehicleCreateComponent,
     VehicleEditComponent,
+    OrderIndexComponent,
+    OrderCreateComponent,
+    UserIndexComponent
   ],
   imports: [
     BrowserModule,

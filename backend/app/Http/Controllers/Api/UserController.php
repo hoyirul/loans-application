@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VehicleRequest;
-use App\Models\Vehicle;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
-class VehicleController extends Controller
+class UserController extends Controller
 {
     use ApiResponse;
 
     public function index()
     {
         try {
-            $response = Vehicle::orderBy('id', 'asc')->get();
+            $response = User::with('role')->where('role_id', '!=', 1)->orderBy('id', 'asc')->get();
             return $this->apiSuccess($response, Response::HTTP_OK);
         } catch (\Throwable $e) {
             return $this->apiError(
@@ -25,11 +26,16 @@ class VehicleController extends Controller
         }
     }
 
-    public function store(VehicleRequest $request)
+    public function store(UserRequest $request)
     {
         try {
             $validated = $request->validated();
-            $response = Vehicle::create($validated);
+            $response = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => Hash::make('password'),
+                'role_id' => 2,
+            ]);
             return $this->apiSuccess($response, Response::HTTP_CREATED);
         } catch (\Throwable $e) {
             return $this->apiError(
@@ -42,7 +48,7 @@ class VehicleController extends Controller
     public function show($id)
     {
         try {
-            $response = Vehicle::find($id);
+            $response = User::find($id);
             if ($response == null) {
                 return $this->apiError(
                     'Data not found',
@@ -58,18 +64,21 @@ class VehicleController extends Controller
         }
     }
 
-    public function update(VehicleRequest $request, $id)
+    public function update(UserRequest $request, $id)
     {
         try {
             $validated = $request->validated();
-            $response = Vehicle::find($id);
+            $response = User::find($id);
             if ($response == null) {
                 return $this->apiError(
                     'Data not found',
                     Response::HTTP_NOT_FOUND
                 );
             }
-            $response->update($validated);
+            $response->update([
+                'name' => $validated['name'],
+                'email' => $validated['email']
+            ]);
             return $this->apiSuccess($response, Response::HTTP_OK);
         } catch (\Throwable $e) {
             return $this->apiError(
@@ -82,21 +91,13 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         try {
-            $response = Vehicle::find($id);
+            $response = User::find($id);
             if ($response == null) {
                 return $this->apiError(
                     'Data not found',
                     Response::HTTP_NOT_FOUND
                 );
             }
-
-            if ($response->orders()->count() > 0) {
-                return $this->apiError(
-                    'Cannot delete data, because it is used in orders',
-                    Response::HTTP_FORBIDDEN
-                );
-            }
-
             $response->delete();
             return $this->apiSuccess($response, Response::HTTP_OK);
         } catch (\Throwable $e) {

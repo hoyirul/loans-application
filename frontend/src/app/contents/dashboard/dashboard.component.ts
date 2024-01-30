@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { StorageService } from 'src/app/services/auth/storage.service';
 import { EndpointService } from 'src/app/services/endpoints/endpoint.service';
 import { blue600, rose600 } from 'src/app/utils/color-picker';
 
@@ -22,7 +23,7 @@ export class DashboardComponent {
   chart_vehicle: any
 
   constructor(
-    private _service: EndpointService
+    private _service: EndpointService,
   ){}
 
   getReportApprovedOrders = () => {

@@ -3,12 +3,11 @@ import { EndpointService } from 'src/app/services/endpoints/endpoint.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-vehicle-index',
-  templateUrl: './vehicle-index.component.html',
-  styleUrls: ['./vehicle-index.component.css']
+  selector: 'app-order-index',
+  templateUrl: './order-index.component.html',
+  styleUrls: ['./order-index.component.css']
 })
-export class VehicleIndexComponent {
-
+export class OrderIndexComponent {
   response: any;
 
   constructor(
@@ -25,8 +24,8 @@ export class VehicleIndexComponent {
     return value < 10 ? `0${value}` : `${value}`;
   }
 
-  getVehicles = () => {
-    this._service.getVehicles().subscribe(
+  getOrders = () => {
+    this._service.getOrders().subscribe(
       (data: any) => {
         this.response = data.data;
       },
@@ -36,45 +35,38 @@ export class VehicleIndexComponent {
     )
   }
 
-  deleteVehicle = (id: number) => {
+  deleteOrder = (id: string) => {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You will not be able to recover this vehicle!',
+      text: 'You will not be able to recover this order!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, keep it!',
     }).then((result: any) => {
       if (result.value) {
-        this._service.deleteVehicle(id).subscribe(
+        this._service.deleteOrder(id).subscribe(
           (data: any) => {
-            this.response = data.data;
-            this.getVehicles();
+            this.getOrders();
             Swal.fire(
               'Deleted!',
-              'Your vehicle has been deleted.',
+              'Your order has been deleted.',
               'success'
             )
           },
           error => {
             Swal.fire(
-              'Error!',
-              'Your vehicle has not been deleted. Cause vehicle is in use.',
+              'Failed!',
+              'Your order failed to delete.',
               'error'
             )
           }
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your vehicle is safe :)',
-          'error'
         )
       }
     })
   }
 
   ngOnInit(): void {
-    this.getVehicles();
+    this.getOrders();
   }
 }

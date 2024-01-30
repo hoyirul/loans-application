@@ -36,11 +36,6 @@ export class AuthenticationComponent implements OnInit {
   authLogin(): void {
     const { email, password } = this.form.value;
 
-    if (this.auth.getToken() && this.isLoggedIn) {
-      this.router.navigate(['/']);
-      return;
-    }
-
     this.authService.login(email, password).subscribe({
       next: data => {
         this.handleLoginSuccess(data);
@@ -58,6 +53,9 @@ export class AuthenticationComponent implements OnInit {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.roles = this.auth.getUser().roles;
+
+    this.router.navigate(['/']);
+    window.location.reload();
 
     Swal.fire(
       'Welcome!',

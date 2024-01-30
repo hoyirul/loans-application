@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\VehicleController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ApprovalController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/logout', [AuthController::class, 'logout']);
     });
 
+    Route::apiResource('/users', UserController::class);
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/vehicles', VehicleController::class);
     Route::apiResource('/orders', OrderController::class);
