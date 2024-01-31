@@ -1,0 +1,955 @@
+{
+	"info": {
+		"_postman_id": "02e11d30-c0e3-41d1-b274-5b2c366eeff4",
+		"name": "Loans-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12858976",
+		"_collection_link": "https://cukup-pak.postman.co/workspace/Projects~1af2bfb7-d966-4f94-a24c-9170102fe832/collection/12858976-02e11d30-c0e3-41d1-b274-5b2c366eeff4?action=share&source=collection_link&creator=12858976"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/auth/login",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "UMKM 5",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "umkm5@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "role_id",
+									"value": "2",
+									"description": "Catatan untuk role bisa menggunakan\n2 -> umkm\n3 -> customer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/auth/register",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/auth/logout",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "List Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/roles",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "role",
+									"value": "Testing",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/roles",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "role",
+									"value": "Testings",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/roles/3",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"roles",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{urls}}/roles/4",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"roles",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "List Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/users",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "role",
+									"value": "Testing",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/roles",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "role",
+									"value": "Testings",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/users/3",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicles",
+			"item": [
+				{
+					"name": "List Vehicles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/vehicles/9",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"vehicles",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "category",
+									"value": "goods",
+									"description": "people or goods",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "rent",
+									"description": "mine or rent",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Toyota Box Container",
+									"type": "text"
+								},
+								{
+									"key": "police_number",
+									"value": "B 1928 AHS",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "bbm_consume",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "service_schedule",
+									"value": "2024-01-19",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/vehicles",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "category",
+									"value": "people",
+									"description": "people or goods",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "rent",
+									"description": "mine or rent",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Toyota Box Containers",
+									"type": "text"
+								},
+								{
+									"key": "police_number",
+									"value": "B 1928 AHA",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "bbm_consume",
+									"value": "21",
+									"type": "text"
+								},
+								{
+									"key": "service_schedule",
+									"value": "2024-01-20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/vehicles/9",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"vehicles",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{urls}}/vehicles/3",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"vehicles",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Approvals",
+			"item": [
+				{
+					"name": "List Approvals",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/approvals",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"approvals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Approval Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "approved",
+									"description": "approved or rejected",
+									"type": "text"
+								},
+								{
+									"key": "information",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/approvals/11",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"approvals",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Approval",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "order_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "level",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/approvals",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"approvals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy Approval",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{urls}}/approvals/12",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"approvals",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "List Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/orders",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Approved Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/orders/reports/approved-orders",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"orders",
+								"reports",
+								"approved-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Vehicle Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urls}}/orders",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Reports Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "vehicle_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "employee_name",
+									"value": "Jonas Monkey",
+									"type": "text"
+								},
+								{
+									"key": "driver_name",
+									"value": "John Adam",
+									"type": "text"
+								},
+								{
+									"key": "information",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/orders",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "vehicle_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "employee_name",
+									"value": "Jonas Monkey",
+									"type": "text"
+								},
+								{
+									"key": "driver_name",
+									"value": "John Adam",
+									"type": "text"
+								},
+								{
+									"key": "information",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urls}}/orders",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{urls}}/orders/TRX000006",
+							"host": [
+								"{{urls}}"
+							],
+							"path": [
+								"orders",
+								"TRX000006"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

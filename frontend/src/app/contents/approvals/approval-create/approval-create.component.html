@@ -93,7 +93,7 @@
                   <button *ngIf="item.status == 'waiting'" class="btn btn-outline-danger btn-sm" (click)="deleteApproval(item.id)">
                     <i class="ti ti-trash"></i>
                   </button>
-                  <button class="btn btn-outline-gray btn-sm">can't delete</button>
+                  <button *ngIf="item.status != 'waiting'" class="btn btn-outline-gray btn-sm">can't delete</button>
                 </div>
               </td>
             </tr>

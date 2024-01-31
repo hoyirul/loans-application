@@ -33,14 +33,14 @@ class ApprovalSeeder extends Seeder
                 'user_id' => 2,
                 'order_id' => 'TRX000002',
                 'approval_date' => '2024-01-11',
-                'status' => 'rejected',
+                'status' => 'approved',
                 'level' => '1',
             ],
             [
                 'user_id' => 3,
                 'order_id' => 'TRX000002',
                 'approval_date' => '2024-01-11',
-                'status' => 'pending',
+                'status' => 'approved',
                 'level' => '2',
             ],
             [

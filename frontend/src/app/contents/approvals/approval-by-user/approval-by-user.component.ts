@@ -85,9 +85,46 @@ export class ApprovalByUserComponent {
     })
   }
 
-  detail(id: number): void {
-    // show detail with swall
-
+  openDetail(item: any): void {
+    console.log(item);
+    Swal.fire({
+      title: 'Approval Detail',
+      html: `
+        <table class="table">
+          <tr>
+            <td class='text-start'><strong>Order ID</strong></td>
+            <td>${item.order.order_id}</td>
+          </tr>
+          <tr>
+            <td class='text-start'><strong>Employee Name</strong></td>
+            <td>${item.order.employee_name}</td>
+          </tr>
+          <tr>
+            <td class='text-start'><strong>Driver Name</strong></td>
+            <td>${item.order.driver_name}</td>
+          </tr>
+          <tr>
+            <td class='text-start'><strong>Order Date</strong></td>
+            <td>${this.formatDate(item.order.order_date)}</td>
+          </tr>
+          <tr>
+            <td class='text-start'><strong>Date of Return</strong></td>
+            <td>${item.order.date_of_return == null ? '-' : this.formatDate(item.order.date_of_return)}</td>
+          </tr>
+          <tr>
+            <td class='text-start'><strong>Information</strong></td>
+            <td>${item.order.information}</td>
+          </tr>
+        </table>
+      `,
+      showCancelButton: false,
+      confirmButtonText: 'Close',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // do nothing
+      }
+    });
   }
 
   handleSuccess(data: any, message: string): void {

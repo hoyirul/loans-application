@@ -85,13 +85,15 @@ Kombinasi dari Laravel sebagai backend dan Angular sebagai frontend memberikan k
 
 ## File Pendukung
 
-- Video Aplikasi
+- Video Aplikasi [Video](https://youtu.be/-Qd7IZA-_eg)
 - API Dokumentasi [http://localhost:8000/request-docs](http://localhost:8000/request-docs) pastikan sudah menjalankan backend
-- Api Postman
-- Struktur Data Konsep 
-  <img src="./additionals/pdm.png">
-- User Case Diagram
+- Api Postman dapat dilihat pada folder /additionals/postman/*
+- User Case Diagram <br/>
   <img src="./additionals/ucd.png">
+- Activity Diagram <br/>
+  <img src="./additionals/ucd.png">
+- Struktur Data Konsep <br/>
+  <img src="./additionals/pdm.png">
   
 
 ## Author

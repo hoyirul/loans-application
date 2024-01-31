@@ -78,7 +78,7 @@
                     <i class="ti ti-x"></i>
                     Reject
                   </button>
-                  <button *ngIf="item.status == 'waiting' || item.status == 'approved' || item.status == 'rejected'" class="btn btn-outline-secondary btn-sm" (click)="detail(item.id)">
+                  <button *ngIf="item.status == 'waiting' || item.status == 'approved' || item.status == 'rejected'" class="btn btn-outline-secondary btn-sm" (click)="openDetail(item)">
                     <i class="ti ti-eye"></i>
                     Detail
                   </button>
