@@ -6,21 +6,14 @@
       <br><br>
       <form [formGroup]="form" (ngSubmit)="createOrder()">
         <div class="mb-3 row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <label for="selectVehicle" class="form-label">Vehicles</label>
             <select class="form-select" id="single-select" aria-label="Default select example" formControlName="vehicle_id">
               <option disabled selected value="-1">Click to open vehicles</option>
               <option *ngFor="let item of vehicles" value="{{ item.id }}">{{ item.name }}</option>
             </select>
           </div>
-          <div class="col-md-4">
-            <label for="selectUser" class="form-label">Approval User</label>
-            <select class="form-select" id="multiple-select" aria-label="Default select example" formControlName="approval_user_id">
-              <option disabled selected value="-1">Click to open users</option>
-              <option *ngFor="let item of approval_users" [value]="item.id">{{ item.name }}</option>
-            </select>
-          </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <label for="employeeName" class="form-label">Employee Name</label>
             <input type="text" class="form-control" id="employeeName" placeholder="Employee Name" formControlName="employee_name">
           </div>

@@ -20,56 +20,56 @@ class ApprovalSeeder extends Seeder
                 'order_id' => 'TRX000001',
                 'approval_date' => '2024-01-10',
                 'status' => 'approved',
-                'information' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'level' => '1',
             ],
             [
                 'user_id' => 3,
                 'order_id' => 'TRX000001',
                 'approval_date' => '2024-01-10',
                 'status' => 'approved',
-                'information' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'level' => '2',
             ],
             [
                 'user_id' => 2,
                 'order_id' => 'TRX000002',
                 'approval_date' => '2024-01-11',
                 'status' => 'rejected',
-                'information' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'level' => '1',
             ],
             [
                 'user_id' => 3,
                 'order_id' => 'TRX000002',
                 'approval_date' => '2024-01-11',
                 'status' => 'pending',
-                'information' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'level' => '2',
             ],
             [
                 'user_id' => 2,
                 'order_id' => 'TRX000003',
                 'approval_date' => '2024-01-12',
                 'status' => 'rejected',
-                'information' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'level' => '1',
             ],
             [
                 'user_id' => 3,
                 'order_id' => 'TRX000003',
                 'approval_date' => '2024-01-12',
                 'status' => 'rejected',
-                'information' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'level' => '2',
             ],
             [
                 'user_id' => 2,
                 'order_id' => 'TRX000004',
                 'approval_date' => null,
                 'status' => 'pending',
-                'information' => null
+                'level' => '1',
             ],
             [
                 'user_id' => 3,
                 'order_id' => 'TRX000004',
                 'approval_date' => null,
-                'status' => 'pending',
-                'information' => null
+                'status' => 'waiting',
+                'level' => '2',
             ]
         ];
 
@@ -79,7 +79,7 @@ class ApprovalSeeder extends Seeder
                 'order_id' => $row['order_id'],
                 'approval_date' => $row['approval_date'],
                 'status' => $row['status'],
-                'information' => $row['information']
+                'level' => $row['level']
             ]);
         }
     }

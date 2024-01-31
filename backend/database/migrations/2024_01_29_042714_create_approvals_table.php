@@ -19,8 +19,8 @@ class CreateApprovalsTable extends Migration
             $table->string('order_id', 20);
             $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
             $table->date('approval_date')->nullable();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->text('information')->nullable();
+            $table->enum('status', ['waiting', 'pending', 'approved', 'rejected'])->default('waiting');
+            $table->enum('level', ['1', '2', '3'])->default('1');
             $table->timestamps();
         });
     }

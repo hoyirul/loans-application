@@ -1,0 +1,106 @@
+<div class="col-lg-12 d-flex align-items-stretch container-fluid">
+  <div class="card w-100">
+    <div class="card-body p-4">
+      <h5 class="card-title fw-semibold float-start">Add Approval Users</h5>
+      <a class="btn btn-primary float-end" [routerLink]="['/orders']">Back to Orders</a>
+      <br><br>
+      <form [formGroup]="form" (ngSubmit)="createApproval()">
+        <div class="mb-3 row">
+          <div class="col-md-6">
+            <label for="selectVehicle" class="form-label">Users</label>
+            <select class="form-select" id="single-select" aria-label="Default select example" formControlName="user_id">
+              <option disabled selected value="-1">Click to open users</option>
+              <option *ngFor="let item of approval_users" value="{{ item.id }}">{{ item.name }}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <!-- level 1,2,3 -->
+            <label for="selectVehicle" class="form-label">Level</label>
+            <select class="form-select" id="single-select" aria-label="Default select example" formControlName="level">
+              <option disabled selected value="-1">Click to open level</option>
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+            </select>
+          </div>
+        </div>
+        <!-- Button -->
+        <button type="submit" class="btn btn-primary float-start">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 d-flex align-items-stretch container-fluid">
+  <div class="card w-100">
+    <div class="card-body p-4">
+      <h5 class="card-title fw-semibold float-start">List Approval Order [{{ id }}]</h5>
+      <br><br>
+      <div class="table-responsive">
+        <table class="table text-nowrap mb-0 align-middle table-striped">
+          <thead class="text-dark fs-4">
+            <tr>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">User</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Level</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Status</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Created At</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Updated At</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Actions</h6>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of approvals">
+              <td class="border-bottom-0">
+                <h6 class="fw-semibold mb-1">{{ item.user.name }}</h6>
+                <span class="fw-normal">{{ item.user.email }}</span>
+              </td>
+              <td class="border-bottom-0">
+                <p class="mb-0 fw-normal">Level {{ item.level }}</p>
+              </td>
+              <td class="border-bottom-0">
+                <div *ngIf="item.status == 'waiting'" class="d-flex align-items-center gap-2">
+                  <span class="badge bg-secondary rounded-3 fw-semibold">Waiting</span>
+                </div>
+                <div *ngIf="item.status == 'pending'" class="d-flex align-items-center gap-2">
+                  <span class="badge bg-warning rounded-3 fw-semibold">Pending</span>
+                </div>
+                <div *ngIf="item.status == 'approved'" class="d-flex align-items-center gap-2">
+                  <span class="badge bg-success rounded-3 fw-semibold">Approved</span>
+                </div>
+                <div *ngIf="item.status == 'rejected'" class="d-flex align-items-center gap-2">
+                  <span class="badge bg-danger rounded-3 fw-semibold">Rejected</span>
+                </div>
+              </td>
+              <td class="border-bottom-0">
+                <p class="mb-0 fw-normal">{{ formatDateTime(item.created_at) }}</p>
+              </td>
+              <td class="border-bottom-0">
+                <p class="mb-0 fw-normal">{{ formatDateTime(item.updated_at) }}</p>
+              </td>
+              <td class="border-bottom-0">
+                <div class="d-flex align-items-center gap-3">
+                  <button *ngIf="item.status == 'waiting'" class="btn btn-outline-danger btn-sm" (click)="deleteApproval(item.id)">
+                    <i class="ti ti-trash"></i>
+                  </button>
+                  <button class="btn btn-outline-gray btn-sm">can't delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

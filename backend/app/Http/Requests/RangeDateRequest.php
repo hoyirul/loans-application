@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class OrderRequest extends FormRequest
+class RangeDateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,8 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'vehicle_id' => 'required|integer',
-            'employee_name' => 'required|string|max:100',
-            'driver_name' => 'required|string|max:100',
-            'information' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ];
     }
 

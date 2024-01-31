@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
+use App\Http\Requests\RangeDateRequest;
 use App\Models\Order;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
@@ -33,6 +34,26 @@ class OrderController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
+    }
+
+    public function reportOrdersByRangeDate(RangeDateRequest $request)
+    {
+        try {
+            $validated = $request->validated();
+            $response = Order::selectRaw('order_id, vehicles.name as name, employee_name, driver_name, order_date, date_of_return, approval_status, loan_status, information')
+                ->join('vehicles', 'vehicles.id', '=', 'orders.vehicle_id')
+                ->whereBetween('order_date', [$validated['start_date'], $validated['end_date']])
+                ->orderBy('order_id', 'asc')
+                ->get();
+
+            return $this->apiSuccess($response, Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return $this->apiError(
+                $e->getMessage(),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+
     }
 
     public function reportApprovedOrders()
@@ -79,7 +100,7 @@ class OrderController extends Controller
             $id_number = $latest ? (int)substr($latest->order_id, 6) + 1 : 1;
             $id = 'TRX' . str_pad($id_number, 6, '0', STR_PAD_LEFT);
 
-            $orders = Order::create([
+            Order::create([
                 'order_id' => $id,
                 'user_id' => Auth::user()->id,
                 'vehicle_id' => $validated['vehicle_id'],
@@ -91,17 +112,6 @@ class OrderController extends Controller
                 'loan_status' => '-',
                 'information' => $validated['information']
             ]);
-
-            $users = explode(',', $validated['approval_user_id']);
-            foreach ($users as $user) {
-                $orders->approval()->create([
-                    'user_id' => $user,
-                    'order_id' => $id,
-                    'approval_date' => NULL,
-                    'status' => 'pending',
-                    'information' => NULL
-                ]);
-            }
 
             $response = Order::with('vehicle', 'user')->find($id);
 
@@ -131,6 +141,33 @@ class OrderController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
+    }
+
+    // update returned date
+    public function updateReturnedDate($id)
+    {
+        try {
+            $response = Order::find($id);
+            if ($response == null) {
+                return $this->apiError(
+                    'Data not found',
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            $response->update([
+                'date_of_return' => Carbon::now(),
+                'loan_status' => 'returned'
+            ]);
+
+            return $this->apiSuccess($response, Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return $this->apiError(
+                $e->getMessage(),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+
     }
 
     public function update(OrderRequest $request, $id)

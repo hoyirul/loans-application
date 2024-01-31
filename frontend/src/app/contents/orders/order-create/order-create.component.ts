@@ -24,7 +24,6 @@ export class OrderCreateComponent {
   initForm(): void {
     this.form = new FormGroup({
       vehicle_id: new FormControl('-1', Validators.required),
-      approval_user_id: new FormControl('-1', Validators.required),
       employee_name: new FormControl('', Validators.required),
       driver_name: new FormControl('', Validators.required),
       information: new FormControl('', Validators.required)
@@ -35,17 +34,6 @@ export class OrderCreateComponent {
     this._service.getVehicles().subscribe(
       (data: any) => {
         this.vehicles = data.data;
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  }
-
-  getApprovalUsers = () => {
-    this._service.getUsers().subscribe(
-      (data: any) => {
-        this.approval_users = data.data;
       },
       error => {
         console.log(error);
@@ -99,7 +87,6 @@ export class OrderCreateComponent {
 
   ngOnInit(): void {
     this.getVehicles();
-    this.getApprovalUsers();
     this.initForm();
   }
 }

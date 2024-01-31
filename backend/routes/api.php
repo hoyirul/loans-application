@@ -38,12 +38,18 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/vehicles', VehicleController::class);
     Route::apiResource('/orders', OrderController::class);
-    Route::get('/orders/reports/approved-orders/', [OrderController::class, 'reportApprovedOrders']);
-    Route::get('/orders/reports/vehicle-orders/', [OrderController::class, 'reportVehicleOrders']);
+    Route::get('/orders/reports/approved-orders', [OrderController::class, 'reportApprovedOrders']);
+    Route::get('/orders/reports/vehicle-orders', [OrderController::class, 'reportVehicleOrders']);
+    Route::get('/orders/{order_id}/returned', [OrderController::class, 'updateReturnedDate']);
+    Route::post('/orders/reports/orders-by-range-date', [OrderController::class, 'reportOrdersByRangeDate']);
     Route::prefix('/approvals')->group(function(){
         Route::get('/', [ApprovalController::class, 'index']);
+        Route::post('/', [ApprovalController::class, 'store']);
         Route::get('/{id}', [ApprovalController::class, 'show']);
-        Route::put('/{id}', [ApprovalController::class, 'updateStatusApproval']);
+        Route::get('/{id}/approve', [ApprovalController::class, 'approve']);
+        Route::get('/{id}/reject', [ApprovalController::class, 'reject']);
+        Route::get('/order/{id}', [ApprovalController::class, 'showByOrderId']);
+        Route::get('/by/user', [ApprovalController::class, 'showByUserId']);
         Route::delete('/{id}', [ApprovalController::class, 'destroy']);
     });
 

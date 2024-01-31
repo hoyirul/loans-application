@@ -66,6 +66,47 @@ export class OrderIndexComponent {
     })
   }
 
+  returned(id: string): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will return this order.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, return it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result: any) => {
+      if (result.value) {
+        this._service.updateReturnOrder(id).subscribe({
+          next: data => {
+            this.handleSuccess(data, 'Order has been returned.');
+          },
+          error: err => {
+            this.handleError(err);
+          }
+        });
+      }
+    })
+  }
+
+  handleSuccess(data: any, message: string): void {
+    this.getOrders();
+    Swal.fire(
+      'Success!',
+      message,
+      'success'
+    )
+  }
+
+  handleError(err: any): void {
+    this.getOrders();
+    Swal.fire(
+      'Error!',
+      'Order has not been returned.',
+      'error'
+    )
+  }
+
   ngOnInit(): void {
     this.getOrders();
   }

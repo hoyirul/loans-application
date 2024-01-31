@@ -11,7 +11,7 @@ class Approval extends Model
 
     protected $fillable =
     [
-        'user_id', 'order_id', 'approval_date', 'status', 'information'
+        'user_id', 'order_id', 'approval_date', 'status', 'level', 'information'
     ];
 
     protected $casts =
