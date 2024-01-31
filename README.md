@@ -90,8 +90,6 @@ Kombinasi dari Laravel sebagai backend dan Angular sebagai frontend memberikan k
 - Api Postman dapat dilihat pada folder /additionals/postman/*
 - User Case Diagram <br/>
   <img src="./additionals/ucd.png">
-- Activity Diagram <br/>
-  <img src="./additionals/ucd.png">
 - Struktur Data Konsep <br/>
   <img src="./additionals/pdm.png">
   
